@@ -1,176 +1,181 @@
-# 🤖 STORK ORACLE 自动验证机器人
+# NodeGo 自动化工具
 
-![Node Version](https://img.shields.io/badge/Node.js-22.x-brightgreen)
-![License](https://img.shields.io/badge/License-MIT-blue)
-![Language](https://img.shields.io/badge/Language-中文-red)
+这是一个支持多账户和代理配置的NodeGo自动化工具，可在VPS上稳定运行。
 
-## 📖 项目介绍
+## 功能特点
 
-这是一个用于 STORK ORACLE 网络的自动验证机器人，支持多账号管理、代理配置和自动验证功能。通过本机器人，您可以轻松参与 STORK ORACLE 的数据验证工作。
+- 支持多账户管理
+- 支持HTTP和SOCKS代理
+- 自动定期ping
+- 彩色日志输出
+- 账户状态监控
+- 优雅的程序退出处理
 
-### ✨ 主要特点
+## 注册账号
 
-- 🚀 支持多账号同时运行
-- 🔐 每个账号独立配置代理
-- 💾 自动保存和管理 Token
-- 📊 实时显示验证统计
-- 🔄 自动错误重试
-- 🌐 支持 HTTP/HTTPS/SOCKS 代理
+1. 使用我的邀请链接注册：[https://app.nodego.ai/r/NODE20F19D1273E7](https://app.nodego.ai/r/NODE20F19D1273E7)
+2. 注册步骤：
+   - 点击链接进入注册页面
+   - 输入您的邮箱地址
+   - 设置安全的密码
+   - 完成邮箱验证
+   - 登录后在个人设置中获取Token
 
-## 🚀 快速开始
+⚠️ 注意事项：
+- 建议使用真实邮箱，方便接收重要通知
+- 请妥善保管您的Token，不要泄露给他人
+- 定期更新Token以确保安全
+- 每个IP限制注册数量，建议使用不同IP注册
 
-### 1️⃣ 前置要求
+## VPS环境配置教程
 
-- Node.js 22.x
-- Linux/Windows 系统
-- 稳定的网络连接
-- Chrome 浏览器
+### 1. 安装Node.js环境
 
-### 2️⃣ 安装步骤
-
-#### 第一步：安装 Chrome 插件
-1. 访问 Chrome 商店安装 [Stork Verify](https://chromewebstore.google.com/detail/stork-verify/knnliglhgkmlblppdejchidfihjnockl) 插件
-
-#### 第二步：注册账号
-1. 点击浏览器中的 Stork Verify 插件图标
-2. 选择"使用电子邮件注册"
-3. 填写注册信息：
-   - 📧 电子邮件地址
-   - 🔑 密码（建议使用强密码）
-   - 🎯 邀请码：`5LUXWB9MN4`
-4. 完成邮箱验证
-
-## 💻 部署教程
-
-### 1️⃣ VPS 环境配置
+首先安装nvm (Node Version Manager)：
 
 ```bash
-# 1. 安装 nvm
+# 安装curl（如果未安装）
+## CentOS/RHEL:
+yum install curl -y
+## Ubuntu/Debian:
+apt update && apt install curl -y
+
+# 下载并安装nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 
-# 2. 配置环境变量（根据您的 shell 选择）
-source ~/.bashrc   # bash 用户
-source ~/.zshrc    # zsh 用户
+# 配置环境变量
+## 如果使用bash：
+source ~/.bashrc
+## 如果使用zsh：
+source ~/.zshrc
 
-# 3. 安装 Node.js
+# 安装Node.js 22
 nvm install 22
+
+# 设置默认版本
 nvm use 22
 nvm alias default 22
 
-# 4. 验证安装
-node -v
-npm -v
+# 验证安装
+node -v   # 预期输出: v22.13.1
+nvm current # 预期输出: v22.13.1
+npm -v    # 预期输出: 10.9.2
 ```
 
-### 2️⃣ 下载并安装项目
+### 2. 下载脚本
 
 ```bash
-# 1. 克隆项目
-git clone https://github.com/mumumusf/STORK.git
-cd STORK
+# 克隆项目仓库
+git clone https://github.com/mumumusf/NodeGo.git
+cd NodeGo
 
-# 2. 安装依赖
-npm install
+# 如果git未安装，先安装git
+## CentOS/RHEL:
+yum install git -y
+## Ubuntu/Debian:
+apt install git -y
 ```
 
-### 3️⃣ 后台运行配置
+### 3. 安装依赖包
 
 ```bash
-# 安装 screen
-apt-get update
-apt-get install screen
+# 初始化项目
+npm init -y
 
-# 创建新会话
-screen -S stork-bot
+# 安装必要的依赖
+npm install chalk axios socks-proxy-agent https-proxy-agent http-proxy-agent
+```
 
-# 启动机器人
+## 使用方法
+
+### 1. 启动脚本
+
+```bash
+node index.js
+```
+
+### 2. 后台运行（推荐）
+
+使用screen保持脚本在后台运行：
+
+```bash
+# 安装screen
+## CentOS/RHEL:
+yum install screen -y
+## Ubuntu/Debian:
+apt install screen -y
+
+# 创建新的screen会话
+screen -S nodego
+
+# 在screen中运行脚本
 node index.js
 
-# 分离会话：按 Ctrl + A, 然后按 D
-# 重新连接：screen -r stork-bot
-# 查看所有会话：screen -ls
+# 分离screen会话（保持脚本运行）
+## 按Ctrl+A，然后按D
+
+# 重新连接到screen会话
+screen -r nodego
+
+# 查看所有screen会话
+screen -ls
 ```
 
-## ⚙️ 配置说明
+### 3. 输入账户信息
 
-### 账号配置
-运行机器人时，需要输入：
-- 📧 邮箱地址
-- 🔑 密码
-- 🌐 代理地址（可选）
+启动脚本后：
+1. 输入NodeGo账户Token
+2. 选择是否使用代理
+3. 如果使用代理，输入代理地址
 
-### 代理配置
-支持以下格式：
-```bash
-# 简单格式
-ip:port
+支持的代理格式：
+- `IP:端口:用户名:密码`
+- `用户名:密码@IP:端口`
+- `IP:端口`
+- `http://IP:端口`
+- `socks5://IP:端口`
 
-# 带认证格式
-ip:port:username:password
+## 常见问题解决
 
-# 完整格式
-protocol:ip:port:username:password
+### 1. 脚本无法启动
+- 检查Node.js版本是否正确：`node -v`
+- 检查是否安装了所有依赖：`npm install`
+- 检查文件权限：`chmod +x index.js`
 
-# 示例
-http://192.168.1.1:8080
-socks5://proxy.example.com:1080:user:pass
-```
+### 2. 代理连接错误
+- 验证代理地址格式是否正确
+- 检查代理是否在线可用
+- 确保代理支持HTTPS连接
 
-## 📁 文件说明
+### 3. 频率限制问题
+- 脚本已内置自动处理频率限制
+- 如遇到频繁限制，建议：
+  - 增加账户之间的延迟时间
+  - 使用不同的代理
+  - 减少同时运行的账户数量
 
-- 📄 `index.js` - 主程序文件
-- 🔐 `tokens_账号邮箱.json` - Token 存储
-- 🌐 `proxies_账号邮箱.txt` - 代理配置
+### 4. Token验证失败
+- 确认Token是否有效
+- 检查Token是否已过期
+- 重新从NodeGo网站获取Token
 
-## ❗ 常见问题
+## 安全提示
 
-### Token 刷新/认证错误
-- ✔️ 检查账号密码
-- ✔️ 验证网络连接
-- ✔️ 测试代理可用性
-
-### 代理连接失败
-- ✔️ 检查代理格式
-- ✔️ 确认代理在线
-- ✔️ 验证认证信息
-
-### 程序意外退出
-- ✔️ 使用 screen 运行
-- ✔️ 检查错误日志
-- ✔️ 确保内存充足
-
-## 📌 注意事项
-
-1. 使用高质量代理
-2. 定期检查运行状态
-3. 安全保管账号信息
-4. 每账号独立代理
-5. 及时更新程序版本
-
-## 🔒 安全提醒
-
-- ⚠️ 不保存明文密码
-- ⚠️ 定期更改密码
-- ⚠️ 使用可靠代理
-- ⚠️ 及时更新程序
-
-## 🆘 技术支持
-
-遇到问题请提供：
-1. 错误截图
-2. 环境信息
-3. 操作步骤
+1. 请使用可靠的VPS服务商
+2. 定期更换服务器密码
+3. 建议使用代理IP，避免服务器IP被封
+4. 重要数据请做好备份
 
 ## ⚠️ 免责声明
 
-- 本程序仅供学习交流
-- 用户承担使用风险
-- 遵守平台服务条款
+- 本程序仅供学习交流使用
+- 使用本程序产生的任何后果由用户自行承担
+- 请遵守相关平台的服务条款
 
 ## 📱 联系方式
 
-- 🐦 Twitter：[@YOYOMYOYOA](https://x.com/YOYOMYOYOA)
-- ✈️ Telegram：[@YOYOZKS](https://t.me/YOYOZKS)
+- Twitter：[@YOYOMYOYOA](https://x.com/YOYOMYOYOA)
+- Telegram：[@YOYOZKS](https://t.me/YOYOZKS)
 
 ---
-由 [@YOYOMYOYOA](https://x.com/YOYOMYOYOA) 用 ❤️ 制作
+由 [@YOYOMYOYOA](https://x.com/YOYOMYOYOA) 用❤️制作
