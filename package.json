@@ -1,25 +1,9 @@
 {
-  "name": "stork-oracle-bot",
-  "version": "1.0.0",
-  "description": "STORK ORACLE 自动验证机器人",
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "start": "node index.js"
-  },
-  "keywords": [
-    "stork",
-    "oracle",
-    "bot",
-    "validation"
-  ],
-  "author": "YOYOMYOYOA",
-  "license": "MIT",
   "dependencies": {
-    "amazon-cognito-identity-js": "^6.3.7",
-    "axios": "^1.6.2",
-    "chalk": "^5.3.0",
-    "https-proxy-agent": "^7.0.2",
-    "socks-proxy-agent": "^8.0.2"
+    "axios": "^1.7.9",
+    "chalk": "^5.4.1",
+    "http-proxy-agent": "^7.0.2",
+    "https-proxy-agent": "^7.0.6",
+    "socks-proxy-agent": "^8.0.5"
   }
-} 
+}
